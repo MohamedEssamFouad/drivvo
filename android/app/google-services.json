@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "150129949898",
+    "project_id": "drivvo-98914",
+    "storage_bucket": "drivvo-98914.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150129949898:android:b93dd6407479b6eed48833",
+        "android_client_info": {
+          "package_name": "com.example.drivvo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150129949898-vc0p86nnt1sct5icj1fqjf1ugvrqn3is.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drivvo",
+            "certificate_hash": "ccfc7eb38f9e57ca8209bb2366c4c1d092cace7c"
+          }
+        },
+        {
+          "client_id": "150129949898-hgn1qqiig1bprqjkll0vq742tm7ne599.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9L86Cdbu1jR-udsuoLrz7dzq0efV24Qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150129949898-hgn1qqiig1bprqjkll0vq742tm7ne599.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
