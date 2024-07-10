@@ -1,3 +1,4 @@
+import 'package:drivvo/Controller/mainController.dart';
 import 'package:drivvo/consts/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,8 +34,8 @@ class ReminderSERVICE extends StatelessWidget {
               if (Next.text.isNotEmpty) {
                 try {
                   int targetOdometer = int.parse(Next.text);
-                  final controller = Get.find<Controller>();
-                  await controller.predictAndSetReminder(targetOdometer);
+                  final controller = Get.find<MainController>();
+                  await controller.serviceHelper.predictAndSetReminder(targetOdometer);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Reminder set successfully!")),
                   );

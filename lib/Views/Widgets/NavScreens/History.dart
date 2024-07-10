@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 
+import '../../../Controller/mainController.dart';
+
 class history extends StatelessWidget {
   const history({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Controller controller = Get.find<Controller>();
+    final MainController controller = Get.find<MainController>();
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -37,7 +39,7 @@ class history extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
-                      controller.carModelController.text,
+                      controller.carModelHelper.carModelController.text,
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -53,7 +55,7 @@ class history extends StatelessWidget {
 
             Expanded(
               child: FutureBuilder<List<Map<String, dynamic>>>(
-                future: controller.fetchServiceHistory(), // This should fetch combined service details
+                future: controller.serviceHelper.fetchServiceHistory(), // This should fetch combined service details
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());

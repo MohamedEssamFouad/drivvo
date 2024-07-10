@@ -1,4 +1,5 @@
 
+import 'package:drivvo/Controller/mainController.dart';
 import 'package:drivvo/consts/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,13 +17,13 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Controller controller = Get.find<Controller>();
+    final MainController controller = Get.find<MainController>();
 
     return Scaffold(
         body: Obx(
           ()=>
           IndexedStack(
-            index:controller.CurrentIndexNav.value ,
+            index:controller.serviceHelper.CurrentIndexNav.value ,
             children: [
               history(),
               Reminder(),
@@ -40,16 +41,16 @@ class NavBar extends StatelessWidget {
           elevation: 0,
           type: BottomNavigationBarType.fixed,
           onTap: (value) {
-            controller.onChange(value); // Correctly change the index
+            controller.serviceHelper.onChange(value); // Correctly change the index
           },
-          currentIndex: controller.CurrentIndexNav.value, // Set the currentIndex for the BottomNavigationBar
+          currentIndex: controller.serviceHelper.CurrentIndexNav.value, // Set the currentIndex for the BottomNavigationBar
           selectedItemColor: consts.myColorButtom,
           unselectedItemColor: Colors.black,
           items: [
-            itemBar(Icons.history, 'History', controller.CurrentIndexNav.value == 0),
-            itemBar(Icons.notifications, 'Reminders', controller.CurrentIndexNav.value == 1),
-            itemBar(Icons.map, 'Route', controller.CurrentIndexNav.value == 2),
-            itemBar(Icons.more_horiz, 'More', controller.CurrentIndexNav.value == 3),
+            itemBar(Icons.history, 'History', controller.serviceHelper.CurrentIndexNav.value == 0),
+            itemBar(Icons.notifications, 'Reminders', controller.serviceHelper.CurrentIndexNav.value == 1),
+            itemBar(Icons.map, 'Route', controller.serviceHelper.CurrentIndexNav.value == 2),
+            itemBar(Icons.more_horiz, 'More', controller.serviceHelper.CurrentIndexNav.value == 3),
 
           ],
         ),

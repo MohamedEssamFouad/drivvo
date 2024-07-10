@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../Controller/Controller.dart'; // Adjust the import based on your project structure
+import '../../Controller/Controller.dart';
+import '../Controller/mainController.dart'; // Adjust the import based on your project structure
 
 class CustomField extends StatelessWidget {
   final String text;
@@ -18,7 +19,7 @@ class CustomField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Controller controller = Get.find<Controller>();
+    final MainController controller = Get.find<MainController>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -31,7 +32,7 @@ class CustomField extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TextFormField(
             obscureText: isPassword
-                ? !controller.isPasswordVisible.value
+                ? !controller.passwordHelper.isPasswordVisible.value
                 : false,
             controller: this.controller,
             validator: validator,
@@ -41,11 +42,11 @@ class CustomField extends StatelessWidget {
               suffixIcon: isPassword ? Obx(() =>
                   IconButton(
                     icon: Icon(
-                      controller.isPasswordVisible.value
+                      controller.passwordHelper.isPasswordVisible.value
                           ? Icons.visibility
                           : Icons.visibility_off,
                     ),
-                    onPressed: controller.togglePasswordVisibility,
+                    onPressed: controller.passwordHelper.togglePasswordVisibility,
                   )) : null,
             ),
           ),

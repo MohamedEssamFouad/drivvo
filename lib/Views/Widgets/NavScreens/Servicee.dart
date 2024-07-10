@@ -1,3 +1,4 @@
+import 'package:drivvo/Controller/mainController.dart';
 import 'package:drivvo/Views/Widgets/NavBar.dart';
 import 'package:drivvo/Views/Widgets/NavScreens/History.dart';
 import 'package:drivvo/consts/consts.dart';
@@ -50,7 +51,7 @@ actions: [
       // Parse the odometer string to an integer safely
       int odometerValue = int.tryParse(controller3.text) ?? 0; // Provides a default value of 0 if parsing fails
 
-      Get.find<Controller>().saveServiceDetails(
+      Get.find<MainController>().serviceHelper.saveServiceDetails(
         controller.text, // Date
         controller2.text, // Time
         controller4.text, // Service Type

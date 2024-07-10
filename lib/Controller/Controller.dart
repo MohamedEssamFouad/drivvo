@@ -56,13 +56,9 @@ class Controller extends GetxController {
     };
     await db.insertUserCar(carModelData);
     await _markChooseCarPageDisplayed();
-    saveCarModelPreference(carModel);
   }
 
-  Future<void> saveCarModelPreference(String carModel) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('carModel', carModel);
-  }
+
 
   Future<void> loadCarModel() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

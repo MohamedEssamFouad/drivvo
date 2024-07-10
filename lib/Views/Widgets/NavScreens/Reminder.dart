@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Controller/Controller.dart';
+import '../../../Controller/mainController.dart';
 
 class Reminder extends StatelessWidget {
   const Reminder({super.key});
@@ -12,9 +13,9 @@ class Reminder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Find your Controller
-    final Controller controller = Get.find<Controller>();
+    final MainController controller = Get.find<MainController>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.fetchReminders();
+      controller.serviceHelper.fetchReminders();
     });
     return Scaffold(
       appBar: AppBar(
@@ -23,7 +24,7 @@ class Reminder extends StatelessWidget {
         title: Text('Reminders', style: TextStyle(color: consts.myColor)),
       ),
       body: Obx(() {
-        if (controller.reminders.isEmpty) {
+        if (controller.serviceHelper.reminders.isEmpty) {
           // Display image if no reminders
           return Center(
             child: Column(
@@ -50,9 +51,9 @@ class Reminder extends StatelessWidget {
         } else {
           // Display list of reminders
           return ListView.builder(
-            itemCount: controller.reminders.length,
+            itemCount: controller.serviceHelper.reminders.length,
             itemBuilder: (context, index) {
-              final reminder = controller.reminders[index];
+              final reminder = controller.serviceHelper.reminders[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
                 child: GestureDetector(

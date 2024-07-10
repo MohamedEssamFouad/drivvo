@@ -1,18 +1,17 @@
 
-import 'package:drivvo/Views/Widgets/authScreen.dart';
+import 'package:drivvo/Controller/mainController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-
+import 'Controller/AuthController.dart';
 import 'Controller/Controller.dart';
 import 'Views/Onboard/ONBoard.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Views/Widgets/NavScreens/History.dart';
+import 'Views/authScreen/AuthScreen.dart';
 import 'model/initNotifications.dart';
 Future<void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +29,10 @@ Future<void> main()async {
 
 SharedPreferences prefs=await SharedPreferences.getInstance();
 bool? hasSeenIntro=prefs.getBool('hasSeenIntro')??false;
-  Get.put(Controller());
+  Get.put(AuthController());
+
+
+  Get.put(MainController());
 
 
   runApp(MyApp(isFirstLaunch: !hasSeenIntro));

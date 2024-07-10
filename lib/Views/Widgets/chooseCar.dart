@@ -1,3 +1,4 @@
+import 'package:drivvo/Controller/mainController.dart';
 import 'package:drivvo/Views/Widgets/NavBar.dart';
 import 'package:drivvo/Views/Widgets/NavScreens/History.dart';
 import 'package:drivvo/consts/consts.dart';
@@ -15,16 +16,8 @@ class ChooseCar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Controller controller = Get.find<Controller>();
-    //final Controller controller = Get.put(Controller());
-
-    return SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-    child: GestureDetector(
-    onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-    child: Container(
-    height: MediaQuery.of(context).size.height, // Make the container take full height of the screen
-    child: Scaffold(
+    final MainController controller = Get.find<MainController>();
+    return Scaffold(
     resizeToAvoidBottomInset: false, // Prevents resizing due to keyboard
     appBar: AppBar(
     centerTitle: true,
@@ -39,78 +32,74 @@ class ChooseCar extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-
-
           child: Stack(
             children:[
-              Stack(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/2,
-                    decoration: BoxDecoration(
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height/2,
+                decoration: BoxDecoration(
 
-                      color: consts.myColorButtom,
-                    ),
+                  color: consts.myColorButtom,
+                ),
 
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height/2.2,
+                decoration: BoxDecoration(
+                  color: consts.myColor,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(70),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/2.2,
-                    decoration: BoxDecoration(
-                      color: consts.myColor,
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(70),
-                      ),
-                    ),
-                    child:  Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 80),
-                      child: Form(
-                        key: formKey,
-                        child: Column(
+                ),
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 80),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                                  child: Icon(Icons.directions_car,color: consts.myColorButtom,),
-                                ),
-                                Flexible(
-                                  child: CustomField(
-                                    text: "Car model",
-                                    controller: controller.carModelController,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter car model';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 5),
+                              child: Icon(Icons.directions_car,color: consts.myColorButtom,),
                             ),
-                            SizedBox(height: 30),
-                            CustomButtom(
-                              onTap: () async {
-                                if (formKey.currentState!.validate()&&!controller.hasDisplayedChooseCarPage.value) {
-                                  await controller.saveCarModel("userId1", controller.carModelController.text);
-                                  Get.to(() => NavBar());
-                                }
-                              },
-                              w: MediaQuery.of(context).size.width * 0.9,
-                              text: "Register",
-                              color: consts.myColorButtom,
-                              colorT: Colors.white,
-                            )
+                            Flexible(
+                              child: CustomField(
+
+                                text: "Car model",
+                                controller: controller.carModelHelper.carModelController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter car model';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
                           ],
                         ),
-                      ),
+                        SizedBox(height: 30),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 25.0),
+                          child: CustomButtom(
+
+                            onTap: () async {
+                              if (formKey.currentState!.validate()) {
+                                await controller.carModelHelper.saveCarModel("userId1", controller.carModelHelper.carModelController.text);
+                                Get.to(() => const NavBar());
+                              }
+                            },
+                            w: MediaQuery.of(context).size.width * 0.85,
+                            text: "Register",
+                            color: consts.myColorButtom,
+                            colorT: Colors.white,
+                          ),
+                        )
+                      ],
                     ),
-
                   ),
-
-
-                ],
+                ),
 
               ),
               Align(
@@ -138,19 +127,10 @@ class ChooseCar extends StatelessWidget {
                 ),
               ),
 
-
-
-
-
-
             ],
-
           ),
-
         ),
       ),
-          ),
-          ),),
-    );
+          );
   }
 }
